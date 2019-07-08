@@ -1,0 +1,32 @@
+源码解析
+OutputFormat
+	TransformOutputFormat extends OutputFormat
+			RecordWriter	getRecordWriter()
+			
+	TransformRecordWriter extends RecordWriter
+			write():当reduce端调用Context.write()
+			close()
+write(key:维度组合对象，value:mapWritableValue):向mysql插入数据
+		连接
+		sql(赋值)
+		excuteUpdate
+		
+mysql表分两类
+	基本维度表
+		id(自增),其他值字段
+	结果表
+		联合主键(包含多个单一维度的id值),其他字段的统计结果
+
+
+
+当需要添加其他模块信息的时候，需要如何修改项目？
+	1.编写ruuner,mapper,reduce
+	2.添加额外的单一维度对象
+	3.添加维度对象的组合
+	4.添加对应的collector类
+	5.修改配置文件
+		query-mapping.xml:添加对应的sql语句
+		output-collector.xml:添加对应的反射映射类
+		
+
+		
